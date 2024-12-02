@@ -24,30 +24,53 @@
                 Please display a hello world message in JavaScript. 
                 <script>
                     document.title = "JavaScript Basic -- In class practice -- Yilian Zhang";
-                    // use document.write to display a message
+                    document.write("Hello World!");
                     
-                    // use console.log to display a message   
+                    console.log("This is for debugging");
                   
                     
                 </script>
             </p>
             <p> Please import external file hello.js here. 
-                
+                <script src="js/hello.js"></script>
             </p>
         </div>
 
         <div class="practice">
             <h1> Variable and Arithemetic Operation</h1>
             <p> Practice on variables </p>
+            <script>
+                var a = parseInt ("10");
+                var b = 3;
+                var c = a + b;
+                document.write("<p> a + b ="+c+"</p>");
+                var d = a % b;
+                document.write("<p> a % b ="+d+"</p>");
+                console.log(typeof a)
 
+                const message = "great";
+                let greeting = "HI";
+                if (true){
+                    let greeting = "Ok";
+                }
+                console.log(greeting);
+            </script>
 
         </div>
 
         <div class="practice">
             <h1> JavaScript Escape Sequence</h1>
             <p> Write an image to the page </p>
-
+            
+            <script>
+                document.write("<img src=\"img/die1.png\">");
+            </script>
             <p> Write a table to the page </p>
+                <script>
+                  //  document.write("<table border=\"1\"> ");
+                  
+
+                </script>
 
         </div>
 
@@ -55,14 +78,18 @@
             <h1>Window and Document Object </h1>
             <p> Try alert, open, location, url </p>
             <script>
-
+                //window.alert("pop up alert windows");
+                //alert("another alert");
+                //window.location.assign("https://www.google.com");
+                //alert(document.lastModified);
+                //console.log(document.location);
             </script>
 
         </div>
 
         <div class="practice">
             <h1> Get textcontent of an element </h1>
-            <p>Perform arithmetic operation on <span id="num1"> 4 </span> and <span id="num2">5 </span> </p>
+            <p>Perform arithmetic operation on <span id="num1"> 4 </span> and <span id="num2"> 5 </span> </p>
             <p>Result:
                 <script src="js/arith.js"></script>
             </p>
@@ -74,8 +101,20 @@
             <p id="p1"> Paragraph Number One </p>
             <p id="p2"> Paragraph Number two </p>
             <p id="p3"> Paragraph Number three </p>
-            <p>Please write JavaScript code to change the content of each paragraph.​
-            <p>
+            <p>Please write JavaScript code to change the content of each paragraph.​</p>
+            <script>
+                // change the first paragraph
+                const pOne = document.getElementById("p1");
+                pOne.innerHTML = "<b> Bold elements </b>";
+
+                const pTwo = document.getElementById("p2");
+                pTwo.textContent = "I changed";
+
+                const pThree = document.getElementById("p3");
+                pThree.textContent = "I changed";
+
+
+            </script>
 
 
         </div>
@@ -85,8 +124,19 @@
             <p> Please enter your numbers </p>
             <script>
                 function calculate() {
+                    const input1 = document.getElementsByName('num1')[0];
+                    console.log("Get the first input" + input1.value);
 
+                    var a = parseFloat(input1.value);
 
+                    const input2 = document.getElementsByName('num2')[0];
+                    console.log("Get the second input" + input2.value);
+
+                    var b = parseFloat(input2.value);
+
+                    var c = a + b;
+                    const resultL = document.getElementById("result");
+                    resultL.textContent = " " + c;
                 }
             </script>
             <p> <input type="text" name="num1" /> + <input type="text" name="num2">
@@ -105,7 +155,7 @@
                     </label>
                 </p>
 
-                <p id="message">
+                <p id="checkmessage">
 
                 </p>
 
@@ -115,14 +165,55 @@
                     </label>
                 </p>
             </form>
+            <script>
+                // Event Handler
+                function welcome() {
+                   // alert("thanks");
+                   const namebox = document.getElementById('cName');
+                   var newmessage = "Welcome " + namebox.value + " you are a new customer";
+
+                   document.getElementById('checkmessage').textContent = newmessage;
+                    
+                }
+
+                //binding -- register the event
+                const nameE = document.getElementById('cName');
+                nameE.addEventListener('blur', welcome);
+
+
+            </script>
+
+
+
 
         </div>
 
         <div class="practice">
             <h1> Practice - Calculate Square</h1>
             Calculating Square:
-            <input type="text" id="num" placeholder="Type in a number"> <sup> 2 </sup> =
-            <label id="result"> ? </label>
+            <input type="text" id="squarenum" placeholder="Type in a number"> <sup> 2 </sup> =
+            <label id="squareresult"> ? </label>
+
+
+            <script>
+                function dosquare(){
+
+                
+                const squareE = document.getElementById("squarenum");
+                var number = parseInt(squareE.value);
+                console.log("The square number is: " + number);
+
+                var newnum = number * number;
+
+                document.getElementById("squareresult").textContent = " " + newnum;
+
+            }
+            const squareE = document.getElementById("squarenum");
+            squareE.addEventListener('change', dosquare);
+            squareE.addEventListener('blur', dosquare);
+
+
+            </script>
 
         </div>
 
@@ -138,6 +229,18 @@
 
             <div id="message"> 
             </div>
+
+
+            <script>
+                function convertHTML(){
+                    const codeE = document.getElementById('code');
+                    const htmlcodeE = document.getElementById('htmlcode');
+
+                    htmlcodeE.innerHTML = codeE.textContent;
+                }
+                
+                document.getElementById("tryit").addEventListener('click', convertHTML);
+            </script>
 
 
         </div>
@@ -161,8 +264,33 @@
             </p>
 
             <script type="text/javascript">
+                var year = document.getElementById('year');
+                var condition = document.getElementById('condition');
+                
 
+                year.addEventListener('change', getprice, false);
+                condition.addEventListener('change', getprice, false);
 
+                function getprice(){
+                    console.log(year.value);
+                    console.log(year.selectedIndex);
+                    if (year.value =="2003" && condition.value == "Fair"){
+                        price = 2000;
+                    } 
+                    else if (year.value == "2004" && condition.value == "Fair"){
+                        price = 4000;
+                    }
+                    else if (year.value == "2003" && condition.value == "Good"){
+                        price = 5000;
+                    }
+                    else if (year.value == "2004" && condition.value == "Good"){
+                        price = 3000;
+                    }else{
+                        price = 3000;
+                    }
+                    document.getElementById("price").innerHTML="The price is <b> " + price + "</b>";
+                }
+               
 
             </script>
 
@@ -173,6 +301,33 @@
             <p> Choose your favorite theme(warm, cool, hot)
                 <input type="text" id="theme">
             </p>
+
+            <script>
+                var theme = document.getElementById('theme');
+                theme.addEventListener('blur', gettheme,false);
+
+                function gettheme(){
+                    var themevalue = document.getElementById('theme').value;
+                    switch (themevalue){
+                        case "warm":
+                        document.body.style.backgroundColor = "yellow";
+                        break;
+                        case "hot":
+                        document.body.style.backgroundColor = "red";
+                        break;
+                        case "cool":
+                        document.body.style.backgroundColor = "blue";
+                        break;
+                        default:
+                        alert("Enter a valid theme");
+                        break;
+                    }
+                }
+
+
+
+            </script>
+
 
         </div>
 
@@ -197,12 +352,48 @@
 
             </p>
             <p>
-                <input type="button" value="Check Premium">
+                <input type="button" id="premium" value="Check Premium">
             </p>
             <p id="result">
 
             </p>
 
+
+            <script>
+
+              //  function getpremium()
+               // {
+                //    var base = 10;
+                //    var coverage = document.querySelector('input[name="coverage"]:checked');
+                  //  var ageindex = docuement.querySelector('#agegroup').selectedIndex;
+                  //  console.log("The coverage is " + coverage + " age " + ageindex);
+
+
+                 //   agefactor = 0;
+                 //   switch(ageindex){
+                  //      case 0: agefactor = 0.08; break;
+                 //       case 1: agefactor = 0.09; break;
+                  //      case 2: agefactor = 0.11; break;
+                   //     case 3: agefactor = 0.17; break;
+                    //    default: break;
+                   // }
+//
+                   // var premium = base + parseFloat(coverage)/1000*agefactor;
+
+                    //display in paragrpah:
+
+
+              //  }
+            
+                //var bE = document.querySelector('input[value="Check Premium"]');
+              //  bE.addEventListener('click', getpremium, false);
+
+
+
+
+
+
+            </script>
         </div>
 
 
@@ -215,6 +406,20 @@
             <p>
                 <input type="button" value="Click for Square">
             </p>
+            <p id="squarelist">  </p>
+            <script>
+              //  var outlist = "<ul>";
+              //  for (let i=0; i<6; i++){
+               //     var square = i * i;
+               //     outlist += "<li>" + i + "^2 = " + square + "/<li>";
+
+                    //alert(square);
+              //  }
+              //  outlist += "</ul>";
+              // document.getElementById('squarelist').innerHTML = outlist;
+
+
+            </script>
 
         </div>
 
@@ -252,6 +457,18 @@
             <p> A simple JavaScript Quiz </p>
             <p>Target: Generate a simple substract and add problems using JavaScript and then check the answers</p>
             <a href="quiz1.html">Do your practice in quiz1.html</a>
+
+            <script>
+
+                // try math.random
+                for (let i=0; i<4; i++){
+                    var num = Math.floor(Math.random()*6, +1);
+                    //alert(num);
+                }
+
+
+
+            </script>
         </div>
 
         <div class="practice">
@@ -278,6 +495,45 @@
                     <td id="r6"></td>
                 </tr>
             </table>
+            <script>
+               // const myarray = [1,2,3,4,5,6,7];
+               // myarray.forEach(element => console.log(element));
+               // myarray.push(8);
+               // myarray.push(10);
+                //myarray.pop();
+                //for (var i in myarray) {
+                //    console.log(myarray[i]);
+
+              //  }
+               // console.log(myarray);
+
+               // Initialize the stats array to track the number of rolls for each dice face (1 to 6)
+var stats = [0, 0, 0, 0, 0, 0]; 
+
+// Function to handle the dice roll
+function rolldice() {
+    console.log('roll click works');
+
+    // Generate a random number between 1 and 6
+    var num = Math.floor(Math.random() * 6) + 1; 
+
+    // Update the dice image based on the rolled number
+    var imgE = document.querySelector('#dieimg'); // Ensure you have an img element with id="dieimg"
+    imgE.setAttribute('src', 'img/die' + num + '.png'); // Update the image source to match the rolled number
+
+    // Increment the stats for the rolled number
+    stats[num - 1]++;
+
+    // Update the statistics display for the rolled number
+    document.getElementById('r' + num).textContent = stats[num - 1].toString();
+}
+
+// Add event listener to the roll button
+document.getElementById('roll').addEventListener('click', rolldice);
+
+
+
+            </script>
 
         </div>
 
@@ -300,7 +556,28 @@
                 <img src="img/usca5.jpg" alt="usca">
             </div>
 			<script>
-				
+				var imglist = document.querySelectorAll('.img-container-hide'); // Select all images with this class
+imglist[0].setAttribute('class', 'img-container'); // Initially show the first image
+var index = 0; // current image
+
+function changepic() {
+    imglist[index].setAttribute('class', 'img-container-hide'); // Hide the current image
+    index++;
+    index = index % imglist.length; // Cycle through images, assuming you have 6 images or more
+
+    imglist[index].setAttribute('class', 'img-container'); // Show the next image
+}
+
+// Set interval to change image every 3 seconds
+setInterval(changepic, 3000);
+
+// Add click event listener to the first image (or any other image you want)
+imglist[0].addEventListener('click', changepic); // Pass the function reference, not invoke it immediately
+
+
+
+
+
 			</script>
 
 
